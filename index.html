@@ -1,13 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
     <title>project Vue.js</title>
 </head>
+
 <body>
-    <h1>this is a title of vue</h1>
-    <p>hola</p>
+    <div id="app">
+        <h1 v-text="h1"></h1>
+        <h2 v-text="text"></h2>
+        <ul v-html="items"></ul>
+        <button type="button" v-on:click="changeRick">
+            Change photo to Rick
+        </button>
+        <button type="button" v-on:click="changeMorty">
+            Change photo to Morty
+        </button>
+        <button type="button" v-on:click="changeBeth">
+            Change photo to Beth
+        </button>
+        <button type="button" v-on:click="changeJerry">
+            Change photo to Jerry
+        </button>
+        <button type="button" v-on:click="changeSummer">
+            Change photo to Summer
+        </button>
+        <br><br><br>
+        <img :style="myStyle" v-bind:src="photoUrl" v-bind:[key]="alt">
+        <br>
+        <div class="content">
+            {{ completeName }}
+        </div>
+        <button type="button" v-on:click="addPhrase($event)">
+            phrase of Rick
+        </button>
+        <p v-html="phrase"></p>
+        <div id="accountant">
+            <h2 v-html="accountant"></h2>
+            <div>
+                <button type="button" v-on:click="del">
+                    -
+                </button>
+                <span v-html="cont"></span>
+                <button type="button" v-on:click="add">
+                    +
+                </button>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                h1: 'Rick y Morty Web Page',
+                text: 'Characters',
+                phrase: '',
+                items: `<li>Rick</li>
+                        <li>Morty</li>
+                        <li>Beth</li>
+                        <li>Jerry</li>
+                        <li>Summer</li>
+                        `,
+                photoUrl: 'rickmorty.jpg',
+                alt: 'rick y morty',
+                key: 'alt',
+                myStyle: 'width: 300px',
+                nameRick: 'Rick',
+                lastRick: 'Sanchez',
+                accountant: 'Accountant',
+                cont: 0,
+            },
+            methods: {
+                changeRick() {
+                    this.photoUrl = 'rickjpg.jpg';
+                },
+                changeMorty() {
+                    this.photoUrl = 'morty.png';
+                },
+                changeBeth() {
+                    this.photoUrl = 'beth.jpg';
+                },
+                changeJerry() {
+                    this.photoUrl = 'jerry.jpg';
+                },
+                changeSummer() {
+                    this.photoUrl = 'summer.jpg';
+                },
+                addPhrase(event) {
+                    this.phrase = 'wubba lubba dub-dub';
+                },
+                add() {
+                    if (this.cont < 10) {
+                        this.cont++;
+
+                    }
+
+                },
+                del() {
+                    if (this.cont > 0) {
+                        this.cont--;
+                    }
+
+
+                },
+            },
+            computed: {
+                completeName() {
+                    return `Hi i'm ${this.nameRick} ${this.lastRick}`;
+                }
+
+
+            }
+
+
+
+        })
+
+    </script>
 </body>
+
 </html>
